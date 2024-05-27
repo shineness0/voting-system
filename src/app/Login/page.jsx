@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -23,6 +24,15 @@ const Login = () => {
 
   const onSubmit = async (e) => {
     e.preventDefault()
+
+    await signIn('credentials', {
+      email: formData.email,
+      password: formData.password,
+      redirect: true,
+      callbackUrl: '/dashboard',
+    })
+
+    return
     const data = new FormData()
 
     data.append('email', formData.email)
@@ -65,7 +75,7 @@ const Login = () => {
                   <div className='form-group mb-4'>
                     <label className='mb-2'>Email</label>
                     <input
-                      type='text'
+                      type='email'
                       className='form-control'
                       name='email'
                       onChange={onChange}

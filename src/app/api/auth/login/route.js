@@ -6,11 +6,11 @@ export const POST = async (request) => {
   try {
     await connectDB()
 
-    const formData = await request.formData()
+    const { email, password } = await request.json()
 
     const userExist = await User.findOne({
-      email: formData.get('email'),
-      password: formData.get('password'),
+      email,
+      password,
     })
 
     if (userExist) {
@@ -18,6 +18,7 @@ export const POST = async (request) => {
         JSON.stringify({
           success: true,
           message: 'Login successful',
+          data: userExist,
         }),
         {
           status: 200,
@@ -27,7 +28,7 @@ export const POST = async (request) => {
       return new Response(
         JSON.stringify({
           success: false,
-          message: 'Invalid email or password',
+          message: 'Invalid username or password',
         }),
         {
           status: 400,

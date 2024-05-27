@@ -6,9 +6,9 @@ export const POST = async (request) => {
   try {
     await connectDB()
 
-    const formData = await request.formData()
+    const body = await request.json()
 
-    const userExist = await User.findOne({ email: formData.get('email') })
+    const userExist = await User.findOne({ email: body.email })
 
     if (userExist) {
       return new Response(
@@ -23,12 +23,12 @@ export const POST = async (request) => {
     }
 
     const user = new User({
-      fullname: formData.get('fullname'),
-      dob: formData.get('dob'),
-      email: formData.get('email'),
-      mobileNo: formData.get('mobileNo'),
-      nin: formData.get('nin'),
-      password: formData.get('password'),
+      fullname: body.fullname,
+      dob: body.dob,
+      email: body.email,
+      mobileNo: body.mobileNo,
+      nin: body.nin,
+      password: body.password,
     })
 
     const userData = await user.save()
