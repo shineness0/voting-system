@@ -1,21 +1,9 @@
-'use client'
-import { useState } from 'react'
 import Link from 'next/link'
 
 const Register = () => {
-  const [formData, setFormData] = useState({
-    fullname: '',
-    dob: '',
-    email: '',
-    mobileNo: '',
-    nin: '',
-    password: '',
-    password2: '',
-  })
-
   return (
     <div className='registercontainer'>
-      <div className='logincontainerdiv'>
+      <div className='logincontainerdiv '>
         <div className='row align-items-md-center h-100'>
           <div className='col-md-10 col-lg-6 d-none d-lg-block mx-auto'>
             <div className='registercontainerinnerfirst'>

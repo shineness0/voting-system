@@ -1,124 +1,33 @@
-*{
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
-
-/* Register */
-.registercontainer{
-  height: 100vh;
-  background-color: #001124;
-}
-
-.registercontainerinner{
-  color: white;
-  display: flex;
-  justify-content: space-around; 
-}
-
-.registercontainerinner2{
-  display: flex;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-}
-
-.registercontainerinnerfirst{
-  border: 2px solid;
-  height: 55vh;
-  width: 53%;
-  border-radius: 50vh;
-  background-color: white;
-  justify-content: center;
-  display: flex;
-  margin: auto !important;
-  background-image: url(../../public/ballot_1581972.png);
-}
-
-
-/* login */
-.logincontainerdiv{
-   height: 100vh;
-  background-color: #001124;
-  color: white;
-}
-
-.logincontainerfirstdiv{
-  display: flex;
-  justify-content: space-between;
-  height: 100vh;
-}
-
-.logincontainerborderdiv{
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.logincontainerborderdivimg{
-  background-image: url(../../public/31876.jpg);
-  background-size: cover;
-  background-position: center;
-  border: 2px solid;
-  height: 60vh;
-  border-radius: 10px;
-  width: 70%;
-  margin:  auto;
-}
-
-/* landing */
-
-.landingcondiv{
-  height: 100vh;
-  background-color: #001124;
-}
-
-.landingcondivinner{
-  height: 100vh;
-  display: flex;
-  align-items: center;
-}
-
-.landingcondivinner2{
-  width: 100%;
-}
-
-.landingcondivinner2img{
-  background-image: url(../../public/voting-box_8596990.png);
-  background-size: cover;
-  height: 50vh;
-  width: 50%;
-  margin: auto;
-}
-
-
-@media (max-width: 768px) {
-  .landingcondivinner{
-    display: block;
-  }
-  .landingcondivinner2img{
-    background-image: url(../../public/voting-box_8596990.png);
-    background-size: cover;
-    height: 50vh;
-    width: 90%;
-    margin: auto;
-
-  }
-  .logincontainerfirstdiv{
-    display: block;
-  }
-  .logincontainerborderdivimg{
-    display: none;
-  }  
-
-  .registercontainerinner{
-    display: block;
-  }
-  .registercontainerinnerfirst{
-   display: none;
-  }
-  .registercontainerinner2{
-    position: absolute;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
   }
 }
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+} */
