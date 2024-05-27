@@ -1,5 +1,3 @@
-'use client'
-import { useState } from 'react'
 import Link from 'next/link'
 import { toast } from 'react-toastify'
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
@@ -59,63 +57,6 @@ const Login = () => {
       setLoading(false)
     }
   }
-
-  return (
-    <>
-      <div className='logincontainerdiv'>
-        <div className='row align-items-center h-100'>
-          <div className='col-md-10 col-lg-6 d-none d-lg-block mx-auto'>
-            <div className='logincontainerborderdivimg'></div>
-          </div>
-          <div className='p-5 col-lg-6'>
-            <div className='col-md-6 col-sm-12 mx-auto'>
-              <form onSubmit={onSubmit}>
-                <h2 className='text-center'>Login</h2>
-                <div>
-                  <div className='form-group mb-4'>
-                    <label className='mb-2'>Email</label>
-                    <input
-                      type='email'
-                      className='form-control'
-                      name='email'
-                      onChange={onChange}
-                      required
-                    />
-                  </div>
-
-                  <div className='form-group mb-4'>
-                    <label className='mb-2'>Password</label>
-                    <input
-                      type='password'
-                      className='form-control'
-                      name='password'
-                      onChange={onChange}
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <div className='mb-4'>
-                      <p className='fw-bold'>Forgot Password?</p>
-                      <div>
-                        <span className='me-2'>Not a user?</span>
-                        <Link href='/register'> Register now</Link>
-                      </div>
-                    </div>
-                    <div className='text-center'>
-                      <button type='submit' className='btn btn-primary w-50'>
-                        Login
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-    </>
-  )
 }
 
 export default Login
