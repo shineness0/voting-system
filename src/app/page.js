@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 'use client'
 import Link from 'next/link'
 import styles from './page.module.css'
@@ -82,10 +81,9 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div>
-          </div>
-          </div>
-          </main>
-          </>
-)
+          <div></div>
+        </div>
+      </main>
+    </>
+  )
 }
