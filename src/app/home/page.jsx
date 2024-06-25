@@ -97,6 +97,14 @@ const VotingPage = () => {
             setLoading(false)
           }
     }
+
+    const chexkvotersCard=()=>{
+        Swal.fire(
+            '',
+            "Key in your card number",
+            'error'
+        )
+    }
     return (
         <div className='bg-ligt h-100'>
             {/* <img src="asset/profileImg.png" alt="profile"  className='card bg-transparent col-4 col-md-10 mx-auto'/> */}
@@ -142,7 +150,7 @@ const VotingPage = () => {
             <div className="candidates">
                 <div className="card mt-4 bg-liht border-0 p-md-2 p-2 p-md-0">
                     {/* cover is use to disable all candidate if card number is still empty */}
-                    <div className={`cover ${getcardNumber ? "d-none" : "d-block"}`}></div>
+                    <div className={`cover ${getcardNumber ? "d-none" : "d-block"}`} onClick={chexkvotersCard}></div>
 
                     <p className='fs-4 fs-md-2 fw-bold px-md-2 border-0' style={themeline}>Eligible Candidates</p>
                     <div className="card col-12 col-md-11 bg-transparent border-0 mx-auto">
