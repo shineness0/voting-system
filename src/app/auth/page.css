@@ -1,0 +1,13 @@
+.auth-page{
+    background-color:rgba(0, 128, 0, 0.7);
+    height:100vh;
+    background-image: url('/flag.jpg');
+    background-size: cover;
+}
+.cardNumber{
+    background-color:rgba(0, 0, 0, 0.382) !important;
+
+}   
+
+@media (max-width:600px) {
+}
