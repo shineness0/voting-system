@@ -1,0 +1,55 @@
+.candidate-img{
+    height: 280px;
+    width: 100%;
+    border-radius: 5px;
+}
+.cover{
+    position: absolute;
+    width: 96%;
+    height: 100%;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.725);
+}
+.loading{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    top: 45%;
+    left: 45%;
+    /* transform: translate(-50%, -50%); */
+    background-color: rgba(0, 128, 0, 0.422);
+}
+.loading .icon{
+    width: 90%;
+    height: 90%;
+    border: 8px solid;
+    border-style: dotted;
+    border-radius: 50%;
+    animation: animate 3s linear infinite forwards;
+}
+.d{
+    color: rgba(0, 128, 0, 0.7);
+}
+@keyframes animate {
+    100%{
+        transform: rotate(1000deg);
+    }
+}
+.figerprint-card{
+    height: 120px;
+}
+.bi-fingerprint{
+    font-size: 80px;
+}
+@media (max-width:600px) {
+    .candidate-img{
+        height: 370px;
+    }
+    .scroll{
+        overflow-x: scroll;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scroll-padding: 200px;
+    }
+}
