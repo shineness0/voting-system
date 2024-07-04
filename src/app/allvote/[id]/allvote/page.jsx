@@ -142,10 +142,10 @@ const VotingPage = () => {
 
                     {/* <p className='fs-4 fs-md-2 fw-bold px-md-2 border-0' style={themeline}>Eligible Candidates</p> */}
                     <div className="card col-12 col-md-11 bg-transparent border-0 mx-auto">
-                        <div className="gap-2 scroll">
+                        <div className="gap-2 scroll d-flex">
                             {
                                 candidates.map((candidate, i) => (
-                                    <div className="d-flex border mt-2" >
+                                    <div className="border mt-2" >
                                         <div className="card col-11 col-md-3 p-2 mt-2 mt-md-0 border-0 shadow-sm" >
                                             {candidateId == i && loadingStatus ?
                                                 <div className="loading shadow bg-white d-flex align-items-center justify-content-center">
@@ -163,14 +163,6 @@ const VotingPage = () => {
                                             <div className='mt-2'>
                                                 <button className='w-100 btn btn-success' onClick={() => { selectCandidate(i) }}>Vote</button>
                                             </div>
-                                        </div>
-                                        <div className="resutl-box p-3">
-                                            <p className='border-bottom border-black'>{candidate.fullname}</p>
-                                            <span>His promise: </span> <br />
-                                            <span>{candidate.promise}</span>
-                                        <div className="vote-box mt-2">
-                                            <p className='fs-3'>Total vote: <span className="border-0" style={themeline}>{countVotes(candidate.party)}</span></p>
-                                        </div>
                                         </div>
                                     </div>
                                 ))
