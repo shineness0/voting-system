@@ -18,7 +18,7 @@ const page = () => {
                 <div className="card bg-transparent  mt-2 col-12">
                 <button className='btn btn-success '>
                     <Link 
-                    href={`/home/${vtcnumber}/vote`}
+                    href={`/vote/${vtcnumber}/vote`}
                     className="text-decoration-none text-white"
                     >
                     Proceed</Link>    

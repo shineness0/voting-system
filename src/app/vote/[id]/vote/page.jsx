@@ -1,9 +1,9 @@
 "use client"
-import axios from 'axios'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
 import './page.css'
 import { useParams } from 'next/navigation'
+import Link from "next/link"
 const VotingPage = () => {
     // 7fcabf234e874dcfa5602da6863e4e1d
     const { id } = useParams()
@@ -61,12 +61,12 @@ const VotingPage = () => {
     const [loadingStatus, setloadingStatus] = useState(false)
     const selectCandidate = (i) => {
         setcandidateId(i)
-        // setloadingStatus(true)
-        // setTimeout(() => {
-        //     const modalbtn = document.getElementById('modal-btn')
-        //     modalbtn.click()
-        //     setloadingStatus(false)
-        // }, 2000);
+        setloadingStatus(true)
+        setTimeout(() => {
+            const modalbtn = document.getElementById('modal-btn')
+            modalbtn.click()
+            setloadingStatus(false)
+        }, 2000);
         
         let voter= {
             party:candidates[i].party,
@@ -92,85 +92,127 @@ const VotingPage = () => {
     const countVotes=(partyName)=> {
         return allVote.filter(entry => entry.party === partyName).length;
     }
+
+    function updateButtonStates() {
+        const nextBtn = document.getElementById('nextBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        // Check if the scroll container is at the start
+        if (scrollContainer.scrollLeft === 0) {
+            nextBtn.disabled = true;
+        } else {
+            nextBtn.disabled = false;
+        }
+
+        // Check if the scroll container is at the end
+        if (scrollContainer.scrollLeft + scrollContainer.clientWidth >= scrollContainer.scrollWidth) {
+            prevBtn.disabled = true;
+        } else {
+            prevBtn.disabled = false;
+        }
+    }
+    const nextBtn=()=>{
+        const scrollContainer = document.getElementById('scrollContainer');
+        scrollContainer.scrollBy({
+            left: 360,
+            behavior: 'smooth'
+        });
+        updateButtonStates()
+    }
+    const preview=()=>{
+        const scrollContainer = document.getElementById('scrollContainer');
+        scrollContainer.scrollBy({
+            left: -360,
+            behavior: 'smooth'
+        });
+        updateButtonStates()
+    }
+
+    
     return (
         <div className='bg-ligt h-100'>
             {/* <img src="asset/profileImg.png" alt="profile"  className='card bg-transparent col-4 col-md-10 mx-auto'/> */}
 
             <div className="card border-0 bg-light" style={{ borderRadius: "0px" }}>
                 <div className="d-flex justify-content-between border-0 fs-4 fs-md-2 p-1 p-md-2" style={themeline}>
-                    <p><i class="bi bi-list"></i></p>
+                    <p type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><i class="bi bi-list"></i></p>
                     <p><i class="bi bi-search"></i></p>
                 </div>
                 <div className="title d-md-flex justify-content-between">
                     <span className='fs-4 fs-md-2 fw-bold px-md-2 border-0' style={themeline}>Eligible candidates</span> <br />
-                    <span className='fs-4 fs-md-2 fw-bold px-md-2 border-0'>Voter's card: <span style={{ color: "green" }}>{id}</span></span>
+                    <span className='fs-4 fs-md-2 fw-bold px-md-2 border-0 d-none d-md-block'>Voter's card: <span style={{ color: "green" }}>{id}</span></span>
                 </div>
             </div>
-            {/* <div className="d-md-flex gap-4 justify-content-center">
-                <div className="card col-11 mx-auto mx-md-0 col-md-5 p-3 border-0 shadow mt-3">
-                    <p style={{ textShadow: "1px 1px 4px 4px green" }} className='fs-5'>Presidential Election</p>
-                    <p>Know the four presidential candidates and vote for your favourite one.</p>
-                    <div className="d-flex align-items-center justify-content-between">
-                        <p className='pt-3'>4 candidates</p>
-                        <button className='btn btn-success'>View</button>
-                    </div>
-                    <div className="d-flex align-items-center justify-content-between">
-                        <p className='pt-3'>Year 2024</p>
-                        <button className='btn btn-success'>Previous year</button>
-                    </div>
-                </div>
-                <div className="card col-11 mx-auto mx-md-0 col-md-5 p-3 border-0 shadow mt-3">
-                    <p style={{ textShadow: "1px 1px 4px 4px green" }} className='fs-5'>Want to vote now ?</p>
-                    <p>Know the four presidential candidates and vote for your favourite one.</p>
-                    <div className="card col-md-12 border-0">
-                        <div className="d-md-flex gap-3  w-100">
-                            <div className="d-flex  gap-2 p-2 bg-light w-100">
-                                <input type="text" className='border-0 w-75 bg-transparent' onChange={(e) => { setcardNumber(e.target.value) }} style={{ outline: "none" }} placeholder="Voter's card number" />
-                                <button className='w-25 btn btn-success' onClick={openCandidate}>Next</button>
-                            </div>
-                            <div className='card border-0 col-md-3 pt-3 text-md-end'>
-                                <p className='fw-semibold border-0' style={themeline}>Can't remeber ? <span className="d-md-none">my voter's card number</span></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> */}
+
+            {/* side bar  */}
+            <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+             <div class="offcanvas-header">
+               <h5 class="offcanvas-title" id="offcanvasExampleLabel">
+                <img src="/e-poll.jpg" className="col-4"/>
+               </h5>
+               <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+             </div>
+             <div class="offcanvas-body">
+               <div>
+                 <div className="shadow fw-semibold p-3" style={{border:"1.5px solid green", color:"green"}}>
+                    <span>NIN: 220135</span>
+                    <br/>
+                    <span>Name: Adekanbi Jawad</span>
+                 </div>
+               </div>
+               <div class="dropdown mt-5">
+                 <div class="d-flex gap-2 fs-5 border-bottom p-1">
+                    <i class="bi bi-house-door-fill bg-light p-2 col-2 text-center rounded" style={{border:"1.5px solid green", color:"green"}}></i>
+                    <span className="p-2 px-0 fw-semibod col-6 ">Home page</span>
+                 </div>
+                 <div class="d-flex gap-2 fs-5 border-bottom p-1 mt-2">
+                    <i class="bi bi-bar-chart-fill bg-light p-2 col-2 text-center rounded" style={{border:"1.5px solid green", color:"green"}}></i>
+                    <span className="p-2 px-0 fw-semibod col-6 ">
+                         <Link
+                         href={`/result`}
+                         className="text-decoration-none text-black">
+                            Voting result
+                         </ Link> 
+                    </span>
+                 </div>
+                 <div class="d-flex gap-2 fs-5 border-bottom p-1 mt-2">
+                    <i class="bi bi-arrow-left-square-fill bg-light p-2 col-2 text-center rounded" style={{border:"1.5px solid green", color:"green"}}></i>
+                    <span className="p-2 px-0 fw-semibod col-6 ">
+                    <Link
+                         href={`/home`}
+                         className="text-decoration-none text-black">
+                            Log out
+                         </ Link> 
+                    </span>
+                 </div>
+               </div>
+             </div>
+            </div>
+            <div className="d-flex d-md-none justify-content-end gap-2 mt-2 ">
+                <button onClick={preview} id="nextBtn" className="btn border border-success">Previous</button>
+                <button onClick={nextBtn} id="prevBtn" className="btn border border-success">Next</button>
+            </div>
             <div className="candidates">
                 <div className="card mt-4 bg-liht border-0 p-md-2 p-2 p-md-0">
-                    {/* cover is use to disable all candidate if card number is still empty */}
-                    <div className={`cover ${getcardNumber ? "d-none" : "d-block"} d-none`}></div>
-
-                    {/* <p className='fs-4 fs-md-2 fw-bold px-md-2 border-0' style={themeline}>Eligible Candidates</p> */}
                     <div className="card col-12 col-md-11 bg-transparent border-0 mx-auto">
-                        <div className="gap-2 scroll">
+                        <div className="gap-2 scroll d-flex" id="scrollContainer">
                             {
                                 candidates.map((candidate, i) => (
-                                    <div className="d-flex border mt-2" >
-                                        <div className="card col-11 col-md-3 p-2 mt-2 mt-md-0 border-0 shadow-sm" >
-                                            {candidateId == i && loadingStatus ?
-                                                <div className="loading shadow bg-white d-flex align-items-center justify-content-center">
-                                                    <div className="icon"></div>
-                                                </div>
-                                                : null}
-                                            <div className="d-flex justify-content-between ">
-                                                <span className='pt-1'>{candidate.party} Party</span>
-                                                {candidateId == i ? <i class="bi bi-check-circle-fill fs-5 text-success"></i> : <i class="bi bi-circle fs-5 text-success"></i>}
+                                    <div className="card col-11 col-md-3 p-2 mt-2 mt-md-0 border-0 shadow-sm" >
+                                        {candidateId == i && loadingStatus ?
+                                            <div className="loading shadow bg-white d-flex align-items-center justify-content-center">
+                                                <div className="icon"></div>
                                             </div>
-                                            <img src={candidate.image} alt="" className='candidate-img' />
-                                            <div className="p-2 bg-light mt-2 rounded border border-success text-center ">
-                                                <span className='fw-semibold'>{candidate.fullname}</span>
-                                            </div>
-                                            <div className='mt-2'>
-                                                <button className='w-100 btn btn-success' onClick={() => { selectCandidate(i) }}>Vote</button>
-                                            </div>
+                                            : null}
+                                        <div className="d-flex justify-content-between ">
+                                            <span className='pt-1'>{candidate.party} Party</span>
+                                            {candidateId == i ? <i class="bi bi-check-circle-fill fs-5 text-success"></i> : <i class="bi bi-circle fs-5 text-success"></i>}
                                         </div>
-                                        <div className="resutl-box p-3">
-                                            <p className='border-bottom border-black'>{candidate.fullname}</p>
-                                            <span>His promise: </span> <br />
-                                            <span>{candidate.promise}</span>
-                                        <div className="vote-box mt-2">
-                                            <p className='fs-3'>Total vote: <span className="border-0" style={themeline}>{countVotes(candidate.party)}</span></p>
+                                        <img src={candidate.image} alt="" className='candidate-img' />
+                                        <div className="p-2 bg-light mt-2 rounded border border-success text-center ">
+                                            <span className='fw-semibold'>{candidate.fullname}</span>
                                         </div>
+                                        <div className='mt-2'>
+                                            <button className='w-100 btn btn-success' onClick={() => { selectCandidate(i) }}>Vote</button>
                                         </div>
                                     </div>
                                 ))
